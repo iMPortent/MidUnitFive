@@ -16,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    Retrofit retrofit;
-    UserServices service;
+    RetrofitFactory retrofitFactory;
+    RetrofitFactory.UserNetworkListener userNetworkListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,29 +30,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(getBaseContext(), 3));
         recyclerView.setAdapter(adapter);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://randomuser.me/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        service = retrofit.create(UserServices.class);
     }
 
-    public void getUsers(){
-        Call<ResponseUser> users = service.getUsers();
-        users.enqueue(new Callback<ResponseUser>() {
+    public void getUser(){
+        userNetworkListener = new RetrofitFactory.UserNetworkListener() {
 
             @Override
-            public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
-                Log.d("TAG", "onResponse: " + response.body().toString());
+            public void userCallback(ResponseUser responseUser) {
 
             }
-
-            @Override
-            public void onFailure(Call<ResponseUser> call, Throwable t) {
-                Log.d("TAG", "onResponse: " + t.toString());
-            }
-        });
+        };
     }
 }
 

@@ -4,12 +4,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 /**
  * Created by C4Q on 1/24/2018.
  */
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+
+    ArrayList<User> users;
+
+    public MyAdapter(ArrayList<User> users){
+        this.users = users;
+    }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,8 +40,13 @@ import android.view.ViewGroup;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        ImageView profilePic;
+        TextView userName;
+
         public MyViewHolder(View itemView) {
             super(itemView);
+            profilePic = itemView.findViewById(R.id.profile_pic);
+            userName = itemView.findViewById(R.id.user_name);
         }
 
         @Override
@@ -37,8 +54,9 @@ import android.view.ViewGroup;
 
         }
 
-        public void bind(){
-
-        }
+        public void bind(User user){
+            userName.setText(user.getName().getFullTitle());
+           Glide.with(profilePic)
+                   .
     }
 }

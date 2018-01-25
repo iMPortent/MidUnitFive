@@ -7,7 +7,9 @@ import java.util.ArrayList;
  */
 
 public class ResponseUser {
+
     ArrayList<User>result;
+
     public ArrayList<User> getResult(){
         return result;
     }

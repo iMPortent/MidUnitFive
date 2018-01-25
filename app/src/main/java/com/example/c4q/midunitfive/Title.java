@@ -18,4 +18,8 @@ class Title {
     public String getLast(){
         return last;
     }
+
+    public String getFullTitle(){
+        return getTitle()+getFirst()+ " " + getLast();
+    }
 }
